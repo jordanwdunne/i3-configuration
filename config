@@ -1,0 +1,188 @@
+# Current i3 Config file
+# Running Ubuntu 16.04 on 2015 MBP
+
+# Mod Key
+set $mod Mod4
+
+# Specify Border Pixel Width
+for_window [class="^.*"] border pixel 1
+new_window 1pixel
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:monospace 0
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+font pango:DejaVu Sans Mono 12
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Start a Terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# Bind specific programs to given keys
+
+# Chromium Browser https://www.chromium.org/Home
+bindsym $mod+o exec chromium-browser
+
+# Spotify Linux Client https://www.spotify.com/us/download/linux/
+bindsym $mod+p exec spotify
+
+# Libreoffice https://www.libreoffice.org/
+bindsym $mod+i exec libreoffice
+
+# Atom Text Editor https://atom.io/
+bindsym $mod+u exec atom
+
+# Due to better support, I run Netflix in app mode within Google Chrome
+bindsym $mod+n exec google-chrome-stable --app=http://netflix.com
+
+# Open RSS client, texting client, and Slack within Chromium app mode
+bindsym $mod+y exec chromium-browser --app=http://feedly.com
+bindsym $mod+m exec chromium-browser --app=https://mightytext.net
+bindsym $mod+t exec chromium-browser --app=https://inventorsguild.slack.com/messages/general/
+
+# Quick screen lock, courtesy of clock https://wiki.debian.org/vlock
+bindsym $mod+z exec vlock
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Start dmenu (a program launcher)
+bindsym $mod+d exec dmenu_run
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# Change Focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# Cursor Key Focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move windows with Vim bindings
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# Move windows with arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Horizontal window split
+bindsym $mod+h split h
+
+# Vertical window split
+bindsym $mod+v split v
+
+# fullscreen mode
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Toggle to floating windows
+bindsym $mod+Shift+space floating toggle
+
+# Change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# Focus the parent container
+bindsym $mod+a focus parent
+
+# Toggle borders
+bindsym $mod+b border toggle
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+
+# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# Exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# i3bar Status Bar
+# Keep the status bar hidden, and show it when the mod key is pressed
+# Position the status bar on the top of the screen
+bar {
+        status_command i3status
+        tray_output primary
+	      position top
+    	  mode hide
+    	  hidden_state hide
+}
+
+# Startup Commands, start with a terminal and browser
+exec i3-sensible-terminal
+exec chromium-browser
+
+# Connect to external monitor, if it's connected
+exec xrandr --output DVI-I-1 --right-of DP-0
+
+# Start the dropbox client to make sure it's syncing
+exec dropbox start
